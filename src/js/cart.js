@@ -3,6 +3,14 @@ import { getLocalStorage } from "./utils.mjs";
 function renderCartContents() {
   const cartItems = getLocalStorage("so-cart") || [];
   const htmlItems = cartItems.map((item) => cartItemTemplate(item));
+  if (cartItems.length > 0) {
+    const total = cartItems.reduce((sum, item) => sum + item.FinalPrice, 0);
+    document.querySelector('.cart-footer').classList.remove('hide');
+    document.querySelector('.cart-total').textContent = `Total: $${total}`;
+  } else {
+    document.querySelector('.cart-footer').classList.add('hide');
+    document.querySelector('.cart-total').textContent = `Total: $0`;
+  }
   document.querySelector(".product-list").innerHTML = htmlItems.join("");
 }
 
