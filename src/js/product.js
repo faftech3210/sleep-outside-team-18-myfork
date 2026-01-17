@@ -12,6 +12,7 @@ console.log(dataSource.findProductById(productId));
 const productDet = new ProductDetails(productId, dataSource);
 productDet.init();
 
+/*
 // add to cart button event handler
 async function addToCartHandler(e) {
   const product = await dataSource.findProductById(e.target.dataset.id);
@@ -22,3 +23,5 @@ async function addToCartHandler(e) {
 document
   .getElementById("addToCart")
   .addEventListener("click", addToCartHandler);
+
+  */
