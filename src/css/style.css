@@ -90,7 +90,7 @@ p {
   margin-top: -1.3em;
 }
 
-.logo--square > div {
+.logo--square>div {
   margin-top: -1.7em;
 }
 
@@ -260,4 +260,75 @@ button {
 footer {
   font-size: var(--small-font);
   padding: 1em;
+}
+
+/* Estilos para el precio con descuento */
+.price-container {
+  margin: 20px 0;
+}
+
+.discount-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.discount-badge {
+  background-color: #ff4444;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+.savings-text {
+  color: #28a745;
+  font-weight: bold;
+  font-size: 0.95rem;
+}
+
+.price-info {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+/* Estilos para las tarjetas de productos */
+.product-card {
+  position: relative;
+}
+
+.product-card__price {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-top: 10px;
+}
+
+/* Badge de descuento en la tarjeta */
+.product-card .discount-badge {
+  background-color: #ff4444;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 3px;
+  font-size: 0.75rem;
+  font-weight: bold;
+  align-self: flex-start;
+  margin-bottom: 5px;
+}
+
+/* Precio original tachado */
+.product-card .original-price {
+  font-size: 0.85rem;
+  color: #999;
+  text-decoration: line-through;
+}
+
+/* Precio final destacado */
+.product-card .final-price {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #333;
 }
