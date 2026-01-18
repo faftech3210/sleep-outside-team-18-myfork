@@ -38,3 +38,13 @@ export function renderListWithTemplate(template, parentElement, list, position =
   }
   parentElement.insertAdjacentHTML(position, htmlStrings.join(""));
 }
+
+// Update cart contents number in header
+export function updateCartCount() {
+  const cartCountElement = document.querySelector(".cart-count");
+  const cartItems = getLocalStorage("so-cart") || [];
+  cartCountElement.textContent = cartItems.length;
+  if (cartItems.length != 0) {
+    cartCountElement.style.visibility = "visible";
+  }
+}

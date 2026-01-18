@@ -1,4 +1,4 @@
-import { setLocalStorage } from "./utils.mjs";
+import { setLocalStorage, updateCartCount } from "./utils.mjs";
 
 export default class ProductDetails {
     constructor(productId, datasource) {
@@ -33,6 +33,9 @@ export default class ProductDetails {
 
         // Guardar el array completo
         setLocalStorage("so-cart", cart);
+
+        // Actualizar el contador del carrito
+        updateCartCount();
 
         console.log("Producto agregado al carrito:", this.product);
     }

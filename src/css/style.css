@@ -90,7 +90,7 @@ p {
   margin-top: -1.3em;
 }
 
-.logo--square>div {
+.logo--square > div {
   margin-top: -1.7em;
 }
 
@@ -129,6 +129,25 @@ button {
 
 .cart:hover svg {
   fill: gray;
+}
+
+/* Number of items on the cart */
+.cart-count {
+  height: 20px;
+  width: 20px;
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem;
+  background-color: rgb(162, 0, 0);
+  color: white;
+  border-radius: 50%;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.75rem;
+  position: absolute;
+  top: 0;
+  right: 0;
+  visibility: hidden;
 }
 
 /* End cart icon styles */

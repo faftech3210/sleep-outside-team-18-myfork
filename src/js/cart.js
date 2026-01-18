@@ -1,4 +1,4 @@
-import { getLocalStorage } from "./utils.mjs";
+import { getLocalStorage, updateCartCount } from "./utils.mjs";
 
 function renderCartContents() {
   const cartFooter = document.querySelector(".cart-footer");
@@ -36,3 +36,5 @@ function cartItemTemplate(item) {
 }
 
 document.addEventListener("DOMContentLoaded", renderCartContents);
+// Update cart count in header on page load
+document.addEventListener("DOMContentLoaded", updateCartCount);
