@@ -261,3 +261,33 @@ footer {
   font-size: var(--small-font);
   padding: 1em;
 }
+
+
+.cart-card {
+  position: relative;
+  
+}
+
+.cart-card__remove {
+  position: absolute;
+  top: 0.25rem;
+  right: 0.02rem;
+  cursor: pointer;
+  background-color: #fff;
+  border-radius: 50%;
+  width: 1.8rem;
+  height: 1.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  color: #c00;
+  border: 1px solid #c00;
+  font-size: 0.9rem;
+}
+
+.cart-card__remove:hover {
+  background-color: #c00;
+  transition: all 0.5s ease;
+  color: #fff;
+}
