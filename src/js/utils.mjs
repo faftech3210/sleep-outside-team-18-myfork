@@ -31,6 +31,12 @@ export function getParam(param) {
 
 
 export function renderListWithTemplate(template, parentElement, list, position = "afterbegin", clear = false) {
+  // Validar que parentElement existe
+  if (!parentElement) {
+    console.error("Error: parentElement is null in renderListWithTemplate");
+    return;
+  }
+
   const htmlStrings = list.map(template);
   // if clear is true we need to clear out the contents of the parent.
   if (clear) {
@@ -42,9 +48,39 @@ export function renderListWithTemplate(template, parentElement, list, position =
 // Update cart contents number in header
 export function updateCartCount() {
   const cartCountElement = document.querySelector(".cart-count");
+  // Si no existe el elemento (por ejemplo, en una página sin header), salimos sin hacer nada
+  if (!cartCountElement) return;
+
   const cartItems = getLocalStorage("so-cart") || [];
   cartCountElement.textContent = cartItems.length;
-  if (cartItems.length != 0) {
-    cartCountElement.style.visibility = "visible";
+  cartCountElement.style.visibility = cartItems.length !== 0 ? "visible" : "hidden";
+}
+
+
+
+export function renderWithTemplate(template, parentElement, data, callback) {
+  parentElement.innerHTML = template;
+
+  if (callback) {
+    callback(data);
   }
+}
+
+export async function loadTemplate(path) {
+  const res = await fetch(path);
+  const template = await res.text();
+  return template;
+}
+
+export async function loadHeaderFooter() {
+  const headerTemplate = await loadTemplate("/partials/header.html");
+  const headerElement = document.querySelector("#main-header");
+  renderWithTemplate(headerTemplate, headerElement);
+  
+  // Una vez que el header existe en el DOM, actualizamos el contador del carrito
+  updateCartCount();
+
+  const footerTemplate = await loadTemplate("/partials/footer.html");
+  const footerElement = document.querySelector("#main-footer");
+  renderWithTemplate(footerTemplate, footerElement);
 }
