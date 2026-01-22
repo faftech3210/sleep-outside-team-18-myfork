@@ -48,7 +48,9 @@ function productDetailsTemplate(product) {
   document.querySelector("h2").textContent = product.Brand.Name;
   document.querySelector("h3").textContent = product.NameWithoutBrand;
 
-  const productImage = document.querySelector("img");
+  //const productImage = document.querySelector("img"); //solo selecciona la primera etiqueta <img> en toda la página
+  const productImage = document.querySelector(".product-image"); //usamos el class para que la imagen sea dinamica
+
   productImage.src = product.Image;
   productImage.alt = product.NameWithoutBrand;
 

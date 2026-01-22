@@ -1,33 +1,28 @@
 import AlertJson from "../public/json/alert.json" assert { type: "json" };
 
 export default class Alert {
+  constructor(mainSelector = "main") {
+    this.alerts = AlertJson;
+    this.mainElement = document.querySelector(mainSelector);
+  }
 
-    constructor(mainSelector = "main") {
+  init() {
+    //console.log(this.alerts, "Alert initialized");
+    if (!this.mainElement) return;
 
-        this.alerts = AlertJson;
-        this.mainElement = document.querySelector(mainSelector);
-    }
+    if (!this.alerts || this.alerts.length === 0) return;
 
+    const section = document.createElement("section");
+    section.classList.add("alert-list");
 
-    init() {
-        //console.log(this.alerts, "Alert initialized");
-        if (!this.mainElement) return;
+    this.alerts.forEach((alert) => {
+      const p = document.createElement("p");
+      p.textContent = alert.message;
+      p.style.backgroundColor = alert.background;
+      p.style.color = alert.color;
+      section.appendChild(p);
+    });
 
-        if (!this.alerts || this.alerts.length === 0) return;
-
-        const section = document.createElement("section");
-        section.classList.add("alert-list");
-
-        this.alerts.forEach((alert => {
-            const p = document.createElement("p");
-            p.textContent = alert.message;
-            p.style.backgroundColor = alert.background;
-            p.style.color = alert.color;
-            section.appendChild(p);
-        }));
-
-        this.mainElement.prepend(section);
-
-    }
-
+    this.mainElement.prepend(section);
+  }
 }

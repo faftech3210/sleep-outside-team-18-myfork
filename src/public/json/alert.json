@@ -1,12 +1,12 @@
 [
-    {
-        "message": "This is only a test",
-        "background": "#f2BBD9",
-        "color": "white"
-    },
-    {
-        "message": "Big sale this weekend!",
-        "background": "#F2F2F2",
-        "color": "black"
-    }
+  {
+    "message": "This is only a test",
+    "background": "#f2BBD9",
+    "color": "white"
+  },
+  {
+    "message": "Big sale this weekend!",
+    "background": "#F2F2F2",
+    "color": "black"
+  }
 ]

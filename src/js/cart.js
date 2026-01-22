@@ -46,7 +46,7 @@ function addRemoveFromCartListener() {
 
       const cartItems = getLocalStorage("so-cart") || [];
       const updatedCart = cartItems.filter(
-        (item) => String(item.Id) !== String(idToRemove)
+        (item) => String(item.Id) !== String(idToRemove),
       );
 
       setLocalStorage("so-cart", updatedCart);
@@ -61,5 +61,4 @@ document.addEventListener("DOMContentLoaded", () => {
   renderCartContents();
   updateCartCount();
   addRemoveFromCartListener();
- 
 });
