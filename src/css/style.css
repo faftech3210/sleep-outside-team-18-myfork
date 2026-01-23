@@ -436,3 +436,42 @@ footer {
     grid-template-columns: 1fr;
   }
 }
+
+/* Estilos para el header de productos con ordenamiento */
+.product-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.sort-products {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.sort-products label {
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+#sort-select {
+  padding: 0.5rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  background-color: white;
+}
+
+#sort-select:hover {
+  border-color: #888;
+}
+
+#sort-select:focus {
+  outline: 2px solid #007bff;
+  border-color: #007bff;
+}

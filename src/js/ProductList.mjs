@@ -57,6 +57,7 @@ export default class ProductList {
         this.category = category;
         this.dataSource = dataSource;
         this.listElement = listElement;
+        this.products = []; // Guardar productos para poder ordenarlos
     }
 
     //Esta parte de cambia por categoria
@@ -66,17 +67,78 @@ export default class ProductList {
     }*/
     async init() {
         const list = await this.dataSource.getData(this.category);
+        this.products = list; // Guardar los productos
         this.renderList(list);
         //document.querySelector(".title").textContent = this.category;
+
+        // Agregar event listener para el selector de ordenamiento
+        this.sortListener();
     }
 
+    // Configurar el listener del selector
+    sortListener() {
+        const sortSelect = document.getElementById("sort-select");
+        if (sortSelect) {
+            sortSelect.addEventListener("change", (e) => {
+                this.sortProducts(e.target.value);
+            });
+        }
+    }
 
+    // Método: ordenar productos
+    sortProducts(sortType) {
+        let sortedProducts = [...this.products]; // Crear una copia del array
+
+        switch (sortType) {
+            case "name":
+                // Ordenar por nombre A-Z
+                sortedProducts.sort((a, b) =>
+                    a.Name.localeCompare(b.Name)
+                );
+                break;
+
+            case "name-desc":
+                // Ordenar por nombre Z-A
+                sortedProducts.sort((a, b) =>
+                    b.Name.localeCompare(a.Name)
+                );
+                break;
+
+            case "price-asc":
+                // Ordenar por precio menor a mayor
+                sortedProducts.sort((a, b) =>
+                    a.FinalPrice - b.FinalPrice
+                );
+                break;
+
+            case "price-desc":
+                // Ordenar por precio mayor a menor
+                sortedProducts.sort((a, b) =>
+                    b.FinalPrice - a.FinalPrice
+                );
+                break;
+        }
+
+        // Volver a renderizar la lista con los productos ordenados
+        this.renderList(sortedProducts);
+    }
 
     renderList(list) {
         // const htmlStrings = list.map(productCardTemplate);
         // this.listElement.insertAdjacentHTML("afterbegin", htmlStrings.join(""));
 
+        // Limpiar la lista actual
+        this.listElement.innerHTML = "";
+
+        // Renderizar cada producto
+        list.forEach((product) => {
+            this.listElement.insertAdjacentHTML(
+                "beforeend",
+                productCardTemplate(product)
+            );
+        });
+
         // apply use new utility function instead of the commented code above
-        renderListWithTemplate(productCardTemplate, this.listElement, list);
+        //renderListWithTemplate(productCardTemplate, this.listElement, list);
     }
 }
