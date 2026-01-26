@@ -90,7 +90,7 @@ p {
   margin-top: -1.3em;
 }
 
-.logo--square>div {
+.logo--square > div {
   margin-top: -1.7em;
 }
 
@@ -218,7 +218,7 @@ button {
   margin: auto;
 }
 
-.product-detail img {
+.product-image {
   width: 100%;
 }
 
@@ -229,6 +229,8 @@ button {
   font-size: var(--small-font);
   /* max-height: 120px; */
   align-items: center;
+  width: 80%;
+  margin-bottom: 15px;
 }
 
 .cart-card__image {
@@ -429,6 +431,10 @@ footer {
     grid-template-columns: repeat(2, 1fr);
     gap: 1.5rem;
   }
+
+  .product-image {
+  width: 70%;
+}
 }
 
 @media (max-width: 480px) {
