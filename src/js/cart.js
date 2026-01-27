@@ -12,7 +12,12 @@ function renderCartContents() {
   const htmlItems = cartItems.map((item) => cartItemTemplate(item));
 
   if (cartItems.length > 0) {
-    const total = cartItems.reduce((sum, item) => sum + item.FinalPrice, 0);
+    const total = cartItems.reduce(
+      (sum, item) => sum + item.FinalPrice * (item.quantity || 1),
+      0
+    );
+
+
     cartFooter.classList.remove("hide");
     cartTotal.textContent = `Total: $${total}`;
   } else {
@@ -30,7 +35,8 @@ function cartItemTemplate(item) {
     </a>
     <a href="#"><h2 class="card__name">${item.Name}</h2></a>
     <p class="cart-card__color">${item.Colors[0].ColorName}</p>
-    <p class="cart-card__quantity">qty: 1</p>
+    <p class="cart-card__quantity">qty: ${item.quantity || 1}</p>
+
     <p class="cart-card__price">$${item.FinalPrice}</p>
     <span data-id="${item.Id}" class="cart-card__remove">x</span>
   </li>`;

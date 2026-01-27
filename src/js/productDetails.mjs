@@ -1,6 +1,4 @@
 import { setLocalStorage, updateCartCount } from "./utils.mjs";
-//const baseURL = import.meta.env.VITE_SERVER_URL;
-const baseURL = "https://wdd330-backend.onrender.com/";
 
 export default class ProductDetails {
   constructor(productId, datasource) {
@@ -10,60 +8,60 @@ export default class ProductDetails {
   }
 
   async init() {
-    // use the datasource to get the details for the current product
+    // Obtener el producto por id
     this.product = await this.datasource.findProductById(this.productId);
 
-    // render the product details
+    // Renderizar detalles
     this.renderProductDetails();
 
-    // add listener to the Add to Cart button
+    // Listener para Add to Cart
     document
       .getElementById("addToCart")
       .addEventListener("click", this.addProductToCart.bind(this));
   }
 
-  addProductToCart() {
-    // Leer lo que ya hay en localStorage
-    let cart = JSON.parse(localStorage.getItem("so-cart"));
-
-    // Si no existe o no es array, inicializarlo
-    if (!Array.isArray(cart)) {
-      cart = [];
-    }
-
-    // Agregar el nuevo producto (usa this.product)
-    cart.push(this.product);
-
-    // Guardar el array completo
-    setLocalStorage("so-cart", cart);
-
-    // Actualizar el contador del carrito
-    updateCartCount();
-  }
-
   renderProductDetails() {
     productDetailsTemplate(this.product);
   }
+
+  //  EXTRA: no duplicar, incrementar quantity
+  addProductToCart() {
+    let cart = JSON.parse(localStorage.getItem("so-cart"));
+    if (!Array.isArray(cart)) cart = [];
+
+    const existingItem = cart.find(
+      (item) => String(item.Id) === String(this.product.Id)
+    );
+
+    if (existingItem) {
+      existingItem.quantity = (existingItem.quantity || 1) + 1;
+    } else {
+      cart.push({ ...this.product, quantity: 1 });
+    }
+
+    setLocalStorage("so-cart", cart);
+    updateCartCount();
+  }
 }
 
+// ---------- TEMPLATE (fuera de la clase) ----------
 function productDetailsTemplate(product) {
-  //document.querySelector("h2").textContent = product.Brand.Name;
-  document.querySelector("h2").textContent = product.Category.charAt(0).toUpperCase() + product.Category.slice(1);
+  document.querySelector("h2").textContent =
+    product.Category.charAt(0).toUpperCase() + product.Category.slice(1);
+
   document.querySelector("h3").textContent = product.NameWithoutBrand;
 
-  //const productImage = document.querySelector("img"); //solo selecciona la primera etiqueta <img> en toda la página
-  const productImage = document.querySelector(".product-image"); //usamos el class para que la imagen sea dinamica
-  productImage.src = product.Images.PrimaryExtraLarge;
+  const productImage = document.querySelector(".product-image");
+  productImage.src =
+    product.Images?.PrimaryExtraLarge ||
+    product.Images?.PrimaryLarge ||
+    product.Images?.PrimaryMedium ||
+    "";
   productImage.alt = product.NameWithoutBrand;
 
-  // Calcular descuento
-  const discount = calculateDiscount(
-    product.SuggestedRetailPrice,
-    product.FinalPrice
-  );
+  const discount = calculateDiscount(product.SuggestedRetailPrice, product.FinalPrice);
   const savings = product.SuggestedRetailPrice - product.FinalPrice;
 
-  // Mostrar precio con descuento
   const priceElement = document.querySelector(".product-card__price");
   if (discount > 0) {
     priceElement.innerHTML = `
@@ -83,14 +81,14 @@ function productDetailsTemplate(product) {
   }
 
   document.querySelector(".product__color").textContent =
-    product.Colors[0].ColorName;
+    product.Colors?.[0]?.ColorName || "";
+
   document.querySelector(".product__description").innerHTML =
     product.DescriptionHtmlSimple;
 
   document.getElementById("addToCart").dataset.id = product.Id;
 }
 
-// Función para calcular el porcentaje de descuento
 function calculateDiscount(suggestedPrice, finalPrice) {
   if (suggestedPrice > finalPrice) {
     const discount = ((suggestedPrice - finalPrice) / suggestedPrice) * 100;
