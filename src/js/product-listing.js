@@ -1,5 +1,5 @@
 import { updateCartCount, loadHeaderFooter, getParam } from "./utils.mjs";
-import ProductData from "./ProductData.mjs";
+import ExternalServices from "./ExternalServices.mjs";
 import ProductList from "./ProductList.mjs";
 import Alert from "./Alert.js";
 
@@ -7,7 +7,7 @@ import Alert from "./Alert.js";
 loadHeaderFooter();
 
 const category = getParam("category");
-const dataSource = new ProductData();
+const dataSource = new ExternalServices();
 const element = document.querySelector(".product-list");
 // Solo inicializar ProductList si el elemento existe
 if (element) {
