@@ -142,3 +142,62 @@ export function renderBreadcrumb({ category = null, count = null }) {
   // Product detail page
   breadcrumb.textContent = category;
 }
+/*export function alertMessage(message, scroll = true, duration = 3000) {
+  const alert = document.createElement("div");
+  alert.classList.add("alert");
+  alert.innerHTML = `<p class="red">${message}</p><span>X</span>`;
+
+  alert.addEventListener("click", function (e) {
+    if (e.target.tagName == "SPAN") {
+      main.removeChild(this);
+    }
+  });
+  const main = document.querySelector("main");
+  main.prepend(alert);
+  // make sure they see the alert by scrolling to the top of the window
+  //we may not always want to do this...so default to scroll=true, but allow it to be passed in and overridden.
+  if (scroll) window.scrollTo(0, 0);
+
+  // left this here to show how you could remove the alert automatically after a certain amount of time.
+  // setTimeout(function () {
+  //   main.removeChild(alert);
+  // }, duration);
+}*/
+
+export function alertMessage(message, scroll = true, duration = 6000) {
+  const alert = document.createElement("div");
+  alert.classList.add("alert");
+
+  // Permitir HTML en el mensaje (para <br>)
+  alert.innerHTML = `
+    <div class="alert-grid">
+      <p class="alert-message">${message}</p>
+      <button class="alert-close" aria-label="Close alert">×</button>
+    </div>
+  `;
+
+  // Event listener para el botón de cerrar
+  const closeBtn = alert.querySelector(".alert-close");
+  closeBtn.addEventListener("click", function () {
+    main.removeChild(alert);
+  });
+
+  // También cerrar después de un tiempo (opcional)
+  if (duration > 0) {
+    setTimeout(() => {
+      if (alert.parentNode === main) {
+        main.removeChild(alert);
+      }
+    }, duration);
+  }
+
+  const main = document.querySelector("main");
+  main.prepend(alert);
+
+  if (scroll) window.scrollTo(0, 0);
+}
+
+export function removeAllAlerts() {
+  const alerts = document.querySelectorAll(".alert");
+  alerts.forEach((alert) => document.querySelector("main").removeChild(alert));
+}

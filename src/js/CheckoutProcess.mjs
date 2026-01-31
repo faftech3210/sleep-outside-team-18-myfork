@@ -1,4 +1,4 @@
-import { getLocalStorage, formDataToJSON } from "./utils.mjs";
+import { getLocalStorage, formDataToJSON, setLocalStorage, alertMessage, removeAllAlerts } from "./utils.mjs";
 import ExternalServices from "./ExternalServices.mjs";
 
 export default class CheckoutProcess {
@@ -58,6 +58,7 @@ export default class CheckoutProcess {
     this.tax = this.itemTotal * 0.06;
 
     const itemCount = this.list.length;
+
     this.shipping = itemCount > 0 ? 10 + (itemCount - 1) * 2 : 0;
 
     this.orderTotal = this.itemTotal + this.tax + this.shipping;
@@ -103,22 +104,26 @@ export default class CheckoutProcess {
     // completar objeto como espera el server
     order.orderDate = new Date().toISOString();
     order.items = this.packageItems(this.list);
-    order.orderTotal = this.orderTotal.toFixed(2);
-    order.shipping = this.shipping;
-    order.tax = this.tax.toFixed(2);
+    order.orderTotal = parseFloat(this.orderTotal.toFixed(2));
+    order.shipping = parseFloat(this.shipping.toFixed(2));
+    order.tax = parseFloat(this.tax.toFixed(2));
     console.log("order:");
     console.log(order);
 
-    // enviar orden al servidor
-    //await this.services.checkout(order);
     try {
       const response = await this.services.checkout(order);
-      console.log("response:");
-      console.log(response);
+      setLocalStorage("so-cart", []);
+      location.assign("/checkout/success.html");
     } catch (err) {
-      console.log(err);
-    }
+      console.log("Error details:", err);
+      removeAllAlerts();
 
+      // Siempre mostrar el mensaje del error
+      alertMessage(err.message);
+
+      // Si quieres mostrar un segundo mensaje genérico también
+      alertMessage("Please check all payment details and try again.");
+    }
   }
 
 }
