@@ -535,6 +535,12 @@ footer {
   animation: shake 0.5s ease;
 }
 
+/*para la tarea de extra bloque 2 */
+.breadcrumb {
+  font-size: 0.9rem;
+  margin: 0.5rem 1rem;
+  color: #555;
+}
 p.red {
   color: red;
   font-weight: bold;

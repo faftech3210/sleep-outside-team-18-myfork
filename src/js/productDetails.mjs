@@ -1,4 +1,10 @@
-import { setLocalStorage, updateCartCount, animateCart, animateCartCount } from "./utils.mjs";
+import {
+  setLocalStorage,
+  updateCartCount,
+  animateCart,
+  animateCartCount,
+  renderBreadcrumb
+} from "./utils.mjs";
 
 export default class ProductDetails {
   constructor(productId, datasource) {
@@ -10,6 +16,8 @@ export default class ProductDetails {
   async init() {
     // Obtener el producto por id
     this.product = await this.datasource.findProductById(this.productId);
+
+    renderBreadcrumb({ category: this.product.Category });
 
     // Renderizar detalles
     this.renderProductDetails();

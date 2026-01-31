@@ -123,6 +123,25 @@ export function animateCartCount() {
   }
 }
 
+export function renderBreadcrumb({ category = null, count = null }) {
+  const breadcrumb = document.querySelector("#breadcrumb");
+  if (!breadcrumb) return;
+
+  // Home page → no breadcrumb
+  if (!category) {
+    breadcrumb.innerHTML = "";
+    return;
+  }
+
+  // Product list page
+  if (count !== null) {
+    breadcrumb.textContent = `${category} → (${count} items)`;
+    return;
+  }
+
+  // Product detail page
+  breadcrumb.textContent = category;
+}
 /*export function alertMessage(message, scroll = true, duration = 3000) {
   const alert = document.createElement("div");
   alert.classList.add("alert");
