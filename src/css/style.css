@@ -103,12 +103,31 @@ button {
   padding: 0.5em 2em;
   background-color: var(--secondary-color);
   color: white;
-  margin: auto;
+  margin: 0.5em auto; /* espacio arriba y abajo */
   display: block;
   border: 0;
   font-size: var(--large-font);
   cursor: pointer;
 }
+
+
+.button-group {
+  display: flex;
+  gap: 1em;
+  justify-content: center; 
+}
+
+.button-group button {
+  padding: 0.5em 2em;
+  background-color: var(--secondary-color);
+  color: white;
+  border: 0;
+  font-size: var(--large-font);
+  cursor: pointer;
+}
+
+
+
 
 .divider {
   border-bottom: 2px solid var(--primary-color);
@@ -681,4 +700,101 @@ p.red {
   background-color: #333;
   color: #fff;
    animation-play-state: paused;
+}
+
+/* estilo para el boton de proceder co el checkout*/
+.checkout-button {
+  padding: 0.5em 2em;
+  background-color: var(--secondary-color);
+  color: white;
+  margin: 0.5em auto;
+  display: block;
+  border: 0;
+  font-size: var(--large-font);
+  cursor: pointer;
+  text-decoration: none; /* quita subrayado */
+  text-align: center;    /* centra el texto */
+}
+
+/*estilos para la pagina checkout*/
+/* Contenedor del formulario */
+#checkoutform {
+  max-width: 800px;
+  margin: 2em auto;
+  padding: 2em;
+  background-color: #fff;
+  border: 1px solid var(--light-grey);
+  border-radius: 8px;
+  font-family: var(--font-body);
+}
+
+/* Fieldsets */
+#checkoutform fieldset {
+  border: 1px solid var(--light-grey);
+  border-radius: 6px;
+  padding: 1.5em;
+  margin-bottom: 1.5em;
+  background-color: #fafafa;
+}
+
+#checkoutform legend {
+  font-weight: bold;
+  color: var(--tertiary-color);
+  padding: 0 0.5em;
+}
+
+/* Labels */
+#checkoutform label {
+  display: block;
+  margin-top: 0.8em;
+  font-size: var(--small-font);
+  color: var(--dark-grey);
+}
+
+/* Inputs */
+#checkoutform input {
+  width: 100%;
+  padding: 0.6em;
+  margin-top: 0.3em;
+  border: 1px solid var(--light-grey);
+  border-radius: 4px;
+  font-size: var(--font-base);
+}
+
+#checkoutform input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 4px var(--primary-color);
+}
+
+/* Order Summary */
+#checkoutform .summary {
+  background-color: #f9f9f9;
+  border: 1px solid var(--light-grey);
+  border-radius: 6px;
+  padding: 1.5em;
+  margin-bottom: 1.5em;
+}
+
+#checkoutform .summary p {
+  margin: 0.5em 0;
+  font-size: var(--large-font);
+}
+
+/* Botón Checkout */
+#checkoutform button[type="submit"] {
+  padding: 0.8em 2em;
+  background-color: var(--secondary-color);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: var(--large-font);
+  cursor: pointer;
+  display: block;
+  margin: 1em auto;
+  transition: background-color 0.3s ease;
+}
+
+#checkoutform button[type="submit"]:hover {
+  background-color: var(--tertiary-color);
 }
