@@ -201,3 +201,35 @@ export function removeAllAlerts() {
   const alerts = document.querySelectorAll(".alert");
   alerts.forEach((alert) => document.querySelector("main").removeChild(alert));
 }
+// wish list
+export function getWishlistKey() {
+  
+  // Por ahora, global para el browser:
+  return "so-wishlist";
+}
+
+export function getWishlist() {
+  const key = getWishlistKey();
+  const data = JSON.parse(localStorage.getItem(key));
+  return Array.isArray(data) ? data : [];
+}
+
+export function setWishlist(list) {
+  const key = getWishlistKey();
+  localStorage.setItem(key, JSON.stringify(list));
+}
+
+export function addToWishlist(product) {
+  const list = getWishlist();
+  const exists = list.some((p) => String(p.Id) === String(product.Id));
+  if (!exists) {
+    list.push(product);
+    setWishlist(list);
+  }
+  return !exists; // true si lo agregó, false si ya existía
+}
+
+export function removeFromWishlist(id) {
+  const list = getWishlist().filter((p) => String(p.Id) !== String(id));
+  setWishlist(list);
+}

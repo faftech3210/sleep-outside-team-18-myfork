@@ -631,3 +631,54 @@ p.red {
   color: #0c5460;
   border-color: #bee5eb;
 }
+
+/*wish Buttom*/
+.wishlist-link {
+  display: inline-flex;
+  align-items: center;
+  margin-left: 1rem;
+  padding: 0.4rem 0.75rem;
+  border: 1px solid #333;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: 600;
+  color: #333;
+  background-color: transparent;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* Icono corazón */
+.wishlist-link::before {
+  content: "❤️";
+  margin-right: 0.35rem;
+  font-size: 1.1em;
+}
+
+
+
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(0,0,0,0.3);
+  }
+  70% {
+    transform: scale(1.08);
+    box-shadow: 0 0 0 8px rgba(0,0,0,0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.wishlist-link {
+  animation: pulse 2.5s infinite;
+}
+
+
+/* Hover */
+.wishlist-link:hover {
+  background-color: #333;
+  color: #fff;
+   animation-play-state: paused;
+}

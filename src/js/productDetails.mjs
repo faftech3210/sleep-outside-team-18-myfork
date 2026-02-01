@@ -3,7 +3,8 @@ import {
   updateCartCount,
   animateCart,
   animateCartCount,
-  renderBreadcrumb
+  renderBreadcrumb,
+  addToWishlist
 } from "./utils.mjs";
 
 export default class ProductDetails {
@@ -26,6 +27,16 @@ export default class ProductDetails {
     document
       .getElementById("addToCart")
       .addEventListener("click", this.addProductToCart.bind(this));
+      
+    //para wishList
+    document
+      .getElementById("addToWishlist")
+      .addEventListener("click", () => {
+        const added = addToWishlist(this.product);
+        // feedback simple (si tienes alertMessage, úsalo)
+        alert(added ? "Added to wishlist!" : "Already in wishlist!");
+      });
+
   }
 
   renderProductDetails() {

@@ -27,6 +27,8 @@ export default defineConfig({
         header: resolve(__dirname, "src/public/partials/header.html"),
         footer: resolve(__dirname, "src/public/partials/footer.html"),
         product_listing: resolve(__dirname, "src/product_listing/index.html"),
+        wishlist: resolve(__dirname, "src/wishlist/index.html"),
+
       },
     },
   },
