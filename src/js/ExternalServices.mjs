@@ -42,7 +42,7 @@ export default class ExternalServices {
     //const data = await response.json();
     const data = await convertToJson(response);
     return data.Result;
-  }
+  } 
 
   async findProductById(id) {
     const response = await fetch(`${baseURL}product/${id}`);
@@ -50,6 +50,14 @@ export default class ExternalServices {
     const data = await convertToJson(response);
     return data.Result;
   }
+
+  async findProductByName(name) {
+    const response = await fetch(`${baseURL}products/search/${name}`);
+    //const data = await response.json();
+    const data = await convertToJson(response);
+    return data.Result;
+  }
+  
 
   //nuevo checkout
 

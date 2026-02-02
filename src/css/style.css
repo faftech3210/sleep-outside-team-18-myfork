@@ -682,3 +682,17 @@ p.red {
   color: #fff;
    animation-play-state: paused;
 }
+
+
+/* COLOR LINKS IMAGE */
+.product__color {
+  display: inline-block;         /* necesario para que transform funcione bien */
+  transition: transform 0.1s ease, color 0.2s ease; /* transición suave */
+  color: var(--dark-grey);
+  text-decoration: none;
+}
+
+.product__color:hover {
+  color: var(--tertiary-color);  /* tu cambio de color */
+  transform: translateY(-3px);   /* eleva el texto unos píxeles */
+}
