@@ -3,13 +3,13 @@ import ExternalServices from "./ExternalServices.mjs";
 import ProductList from "./ProductList.mjs";
 import Alert from "./Alert.js";
 
-// Cargar header y footer
+// Load header and footer
 loadHeaderFooter();
 const category = getParam("category");
 const search = getParam("search");
 const dataSource = new ExternalServices();
 const element = document.querySelector(".product-list");
-// Solo inicializar ProductList si el elemento existe
+// Initialize ProductList only if the item exists
 if (element) {
     const productList = new ProductList(category, search, dataSource, element);
     productList.init();

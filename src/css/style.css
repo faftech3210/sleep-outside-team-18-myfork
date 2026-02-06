@@ -26,6 +26,21 @@ body {
   color: var(--dark-grey);
 }
 
+.why-us {
+  text-align: center;
+  padding: 2rem 1rem;
+}
+
+.why-us ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  padding: 1rem 1rem;
+  background-color: var(--primary-color);
+}
+
+
 img {
   max-width: 100%;
 }
@@ -108,25 +123,43 @@ button {
   border: 0;
   font-size: var(--large-font);
   cursor: pointer;
+  animation: pulse 1.8s ease-in-out infinite;
 }
 
-
-.button-group {
-  display: flex;
-  gap: 1em;
-  justify-content: center; 
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(230, 57, 70, 0.6);
+  }
+  70% {
+    transform: scale(1.05);
+    box-shadow: 0 0 0 8px rgba(230, 57, 70, 0);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(230, 57, 70, 0);
+  }
 }
 
-.button-group button {
-  padding: 0.5em 2em;
-  background-color: var(--secondary-color);
-  color: white;
-  border: 0;
-  font-size: var(--large-font);
-  cursor: pointer;
+#addToCart {
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
 }
 
+#addToCart:active {
+  transform: scale(0.96);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2) inset;
+}
 
+/* Pause pulse when clicked or successful */
+#addToCart:active,
+#addToCart.success {
+  animation: none;
+}
+
+#addToCart.success {
+  background-color: #2ecc71;
+  animation: successFlash 0.6s ease;
+}
 
 
 .divider {
@@ -194,6 +227,13 @@ button {
   padding: 1rem;
 }
 
+.shiping{
+  display: flex;
+  justify-content: center;
+  background-color: var(--primary-color);
+  gap: 20rem;
+}
+
 .product-list {
   display: flex;
   flex-flow: row wrap;
@@ -214,6 +254,17 @@ button {
   border: 1px solid var(--light-grey);
   max-width: 250px;
 }
+
+.product-card:hover img {
+  animation: bounce 0.5s ease;
+}
+
+@keyframes bounce {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
 
 .product-card h2,
 .product-card h3,
@@ -330,7 +381,7 @@ footer {
   padding: 1em;
 }
 
-/* --- Botón eliminar producto del carrito --- */
+/* --- Remove product from cart button --- */
 .cart-card {
   position: relative;
 }
@@ -359,7 +410,7 @@ footer {
   color: #fff;
 }
 
-/* --- Estilos para el precio con descuento --- */
+/* --- Styles at discounted prices --- */
 .price-container {
   margin: 20px 0;
 }
@@ -378,6 +429,22 @@ footer {
   border-radius: 4px;
   font-size: 1.1rem;
   font-weight: bold;
+   animation: pulse 1.8s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(230, 57, 70, 0.6);
+  }
+  70% {
+    transform: scale(1.05);
+    box-shadow: 0 0 0 8px rgba(230, 57, 70, 0);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(230, 57, 70, 0);
+  }
 }
 
 .savings-text {
@@ -456,9 +523,8 @@ footer {
 }
 
 .product-grid a:hover {
-  transform: translateY(-5px);
+  transform: rotate(360deg) scale(1.08);
 }
-
 .product-grid img {
   width: 160px;
   height: 140px;
@@ -472,7 +538,7 @@ footer {
   font-weight: 500;
 }
 
-/* Responsive - Para pantallas más pequeñas */
+/* Responsive - For smaller screens */
 @media (max-width: 768px) {
   .product-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -490,7 +556,7 @@ footer {
   }
 }
 
-/* Estilos para el header de productos con ordenamiento */
+/* Styles for product headers with sorting */
 .product-header {
   display: flex;
   justify-content: space-between;
